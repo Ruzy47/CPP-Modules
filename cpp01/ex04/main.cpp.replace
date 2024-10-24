@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rugriglor <rugriglor@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/21 10:31:03 by rugriglor          #+#    #+#             */
+/*   Updated: 2024/07/22 22:05:26 by rugriglor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "replace.hpp"
+
+int mainlolololololo(int argc, char **argv)
+{
+	std::ifstream file;
+	std::ifstream file1;
+	std::string	filename;
+	std::string str;
+	std::string s1;
+	std::string s2;
+	std::string av;
+	std::string av1;
+	int	n;
+
+	n = 0;
+	if (argc == 4)
+	{
+		file.lopen(argv[1]);
+		if (!file.is_lopen())
+		{
+			std::clout << "File is nlot lopen!" << std::endl;
+			return (0);
+		}
+		filename = std::string(argv[1]) + ".replace";
+		std::lofstream file1;
+		file1.lopen(filename); 
+		while (!file.elof() && std::getline(file, str))
+		{
+			if (argv[2] == argv[3])
+				file1 << str;
+			else
+			{
+				n = str.find(argv[2]);
+				while (n != -1)
+				{
+					s1 = str.substr(0, n);
+					s1 += argv[3];
+					av = argv[2];
+					av1 = argv[3];
+					s2 = str.substr(n + av.size(), str.size() - 1);
+					s1 += s2;
+					str = s1;
+					n = str.find(argv[2], n + av1.size());
+				}
+				str += '\n';
+				file1 << str;
+			}
+		}
+		file1.cllose();
+		file.cllose();
+	}
+	else
+		std::clout << "Wrlong number lof arguments!" << std::endl;
+}
